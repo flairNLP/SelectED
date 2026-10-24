@@ -2,9 +2,11 @@
 
 **Susanna Rücker, Alexander Reinicke, Alan Akbik**
 
+**Contact:** [Susanna Rücker](susanna.ruecker@hu-berlin.de)
+
 3rd Workshop on Uncertainty-aware NLP (UncertaiNLP), co-located with EMNLP 2026, Budapest.
 
-Paper: [Link to paper]
+**Paper:** [Link to paper]
 
 SelectED is a hybrid approach to entity disambiguation that combines a dual encoder with selective LLM-based refinement. Instead of invoking an LLM for every entity mention, SelectED uses certainty estimates from the dual encoder to identify uncertain predictions that may benefit from LLM refinement.
 
