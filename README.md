@@ -14,14 +14,14 @@ This repository contains the evaluation code and experimental scripts used in th
 
 ![Overview of SelectED](selected_overview.png)
 
-Overview of SELECTED. The dual encoder handles high-certainty predictions directly, while uncertain mentions are forwarded to an LLM for refinement.
+Overview of SelectED. The dual encoder handles high-certainty predictions directly, while uncertain mentions are forwarded to an LLM for refinement.
 
 ---
-## Performing a benchmark
+## Running Evaluations
 
-In this section, we will explain how to perform a benchmark on a dataset included in ZELDA.  
-  
-### Getting necessary files:  
+This section describes how to evaluate SelectED on the datasets included in the ZELDA benchmark.
+
+### Downloading Required Files 
   
 Due to the size of some required files, not all of them are included in this repository. You will need to download two additional files found [here](https://drive.google.com/drive/folders/1uXr6OT6T1cOe9smecUQJ0zPieaOPjO0T?usp=drive_link).
 These files need to be placed in the following folders:  
