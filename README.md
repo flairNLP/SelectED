@@ -12,7 +12,7 @@ Our experiments on the ZELDA benchmark show that SelectED improves average accur
 
 This repository contains the evaluation code and experimental scripts used in the paper. The underlying model implementation is available in or modified Flair repository: https://github.com/flairNLP/flair/tree/SelectED
 
-![Overview of SelectED](figures/selected_overview.png)
+![Overview of SelectED](selected_overview.png)
 
 Overview of SELECTED. The dual encoder handles high-certainty predictions directly, while uncertain mentions are forwarded to an LLM for refinement.
 
