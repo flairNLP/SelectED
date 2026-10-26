@@ -6,11 +6,15 @@
 
 3rd Workshop on Uncertainty-aware NLP (UncertaiNLP), co-located with EMNLP 2026, Budapest.
 
-**Paper:** [Link to paper]
+**Paper:** https://aclanthology.org/2026.uncertainlp-main.9/
 
-SelectED is a hybrid approach to entity disambiguation that combines a dual encoder with selective LLM-based refinement. Instead of invoking an LLM for every entity mention, SelectED uses certainty estimates from the dual encoder to identify uncertain predictions that may benefit from LLM refinement.
+---
 
-Our experiments on the ZELDA benchmark show that SelectED improves average accuracy by 4.3 percentage points, while requiring LLM inference for only approximately 20% of entity mentions.
+## What it's about
+
+SelectED is a hybrid approach to entity disambiguation - linking a mention in text to the correct entry in a knowledge base - that combines a dual encoder with selective LLM-based refinement. Instead of invoking an LLM for every entity mention, SelectED uses certainty estimates from the dual encoder to identify uncertain predictions that may benefit from LLM refinement.
+
+Our experiments on the ZELDA benchmark show that SelectED improves average accuracy by 4.3 percentage points, while requiring LLM inference for only approximately 20% of entity mentions. In our experiments, selective prompting outperforms full prompting (LLM inference for all mentions) in both accucary and efficiency.
 
 This repository contains the evaluation code and experimental scripts used in the paper. The underlying model implementation is available in or modified Flair repository: https://github.com/flairNLP/flair/tree/SelectED
 
@@ -18,14 +22,14 @@ This repository contains the evaluation code and experimental scripts used in th
 
 Overview of SelectED. The dual encoder handles high-certainty predictions directly, while uncertain mentions are forwarded to an LLM for refinement.
 
----
-## Running Evaluations
 
-This section describes how to evaluate SelectED on the datasets included in the ZELDA benchmark.
+## Running Evaluations on ZELDA or ACE2004, AQUAINT,MSNBC
 
-### Downloading Required Files 
+This section describes how to evaluate SelectED on the datasets included in the [ZELDA benchmark](https://github.com/flairNLP/zelda) ([Milich and Akbik, 2023](https://aclanthology.org/2023.eacl-main.151/)) and three additional ED test benchmarks.
+
+### Downloading Required Files for the backbone dual encoder
   
-Due to the size of some required files, not all of them are included in this repository. You will need to download two additional files found [here](https://drive.google.com/drive/folders/1uXr6OT6T1cOe9smecUQJ0zPieaOPjO0T?usp=drive_link).
+As our backbone dual encoder we use the VerbalizED model ([Rücker and Akbik, 2025](https://aclanthology.org/2025.acl-long.764/)). You need to download the specific model checkpoint and the used label set and verbalizations, both can be found [here](https://drive.google.com/drive/folders/1uXr6OT6T1cOe9smecUQJ0zPieaOPjO0T?usp=drive_link).
 These files need to be placed in the following folders:  
 - ```final-model.pt``` must be placed in ```Implementation/Models/final-model/```
 - ```verbalizations_structured.json``` must be placed in the root directory of this project.
@@ -43,9 +47,9 @@ You will need to install the following libraries for Python. We have used ```Pyt
 - google-genai
 
 
-### Running benchmarks
+### Running the evaluation
 
-The evaluate script found at ```Implementation/evaluate.py``` is the primary script used to run benchmarks on our implementation. When running the script, you can and must set a number of parameters.  
+The evaluate script found at ```Implementation/evaluate.py``` is the primary script used to repeat the experiments we present in the paper. When running the script, you can and must set a number of parameters:
 
 | Parameter | Required / Optional | Description |
 |---|---|---|
@@ -68,7 +72,7 @@ The evaluate script found at ```Implementation/evaluate.py``` is the primary scr
 
 (Note: This is only a selection of the parameter. To view all parameters, please take a look at ```Implementation/evaluate.py```.)  
 
-To perform a very basic benchmark you can simply run:
+To perform a simple evaluation on AIDA you can simply run:
 
 ```
 python3 Implementation/evaluate.py \
@@ -77,7 +81,7 @@ python3 Implementation/evaluate.py \
     --skip_dev
 ```
   
-To run SelectED with the final configuration described in Table 3 of our paper, use the following command. This example evaluates the AIDA dataset.
+To run SelectED with the final configuration described in Table 3 of our paper, use the following command. This example evaluates only the AIDA dataset.
 
 ```
 python3 Implementation/evaluate.py \
@@ -94,7 +98,7 @@ python3 Implementation/evaluate.py \
 ```
 
 
-### Viewing the results
+### Inspecting the results
 
 The results of each evaluation run are saved in the following directory:
 
@@ -107,3 +111,36 @@ Each directory contains the evaluation outputs, along with automatically compute
 ### Additional Analysis Scripts
 
 The Python scripts (.py) and Jupyter notebooks (.ipynb) in the repository root are used for additional experiments, parameter sweeps, and analysis of benchmark results. These scripts are not required to run the main evaluations described above.
+
+## Cite our work
+
+If you found our work useful, please cite our paper:
+
+```
+@inproceedings{rucker-etal-2026-selected,
+    title = "{S}elect{ED}: Selective {LLM} Refinement for Entity Disambiguation",
+    author = {R{\"u}cker, Susanna  and
+      Reinicke, Alexander  and
+      Akbik, Alan},
+    editor = {Aziz, Wilker  and
+      Berant, Jonathan  and
+      Eikema, Bryan  and
+      Ilia, Evgenia  and
+      de Marneffe, Marie-Catherine  and
+      Plank, Barbara  and
+      Shelmanov, Artem  and
+      Swayamdipta, Swabha  and
+      Tiedemann, J{\"o}rg  and
+      Vazhentsev, Artem  and
+      V{\'a}zquez, Ra{\'u}l  and
+      Zerva, Chrysoula},
+    booktitle = "The Proceedings of the Third Workshop on Uncertainty-Aware {NLP}",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.uncertainlp-main.9/",
+    pages = "111--137",
+    ISBN = "979-8-89176-486-6",
+}
+```
